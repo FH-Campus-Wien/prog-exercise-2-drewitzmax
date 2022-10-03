@@ -1,12 +1,21 @@
 package at.ac.fhcampuswien;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
 
     //todo Task 1
     public void largestNumber(){
-        // input your solution here
+        List<Double> numbers = this.getNumbersUntilNonPositive();
+        try{
+            double max = this.findMaximum(numbers);
+            System.out.println(String.format("The largest number is %.2f", max));
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
     //todo Task 2
@@ -54,5 +63,36 @@ public class App {
 
         System.out.println("\nTask 6: Fröhliche Zahlen");
         exercise2.happyNumbers();
+    }
+
+    private List<Double>getNumbersUntilNonPositive(){
+        int num = 1;
+        List<Double> numbers = new ArrayList<>();
+        boolean wasPositive = false;
+        try(Scanner scanner = new Scanner(System.in)){
+            do{
+                System.out.print(String.format("Number %d: ", num));
+                num++;
+                double input = scanner.nextDouble();
+                wasPositive = input > 0;
+                if(wasPositive){
+                    numbers.add(input);
+                }
+            } while (wasPositive);
+        }
+        return numbers;
+    }
+
+    private double findMaximum(List<Double> numbers){
+        if(numbers.isEmpty()){
+            throw new IllegalArgumentException("No number entered.");
+        }
+        double max = numbers.get(0);
+        for(double num: numbers){
+            if(num > max){
+                max = num;
+            }
+        }
+        return max;
     }
 }
