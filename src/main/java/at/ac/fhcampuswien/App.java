@@ -20,7 +20,22 @@ public class App {
 
     //todo Task 2
     public void stairs(){
-        // input your solution here
+        int lines = this.getPositiveNumber('n');
+        if(lines <= 0){
+            System.out.println("Invalid number!");
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        int number = 1;
+        for(int i = 1; i<=lines; i++){
+            for(int j=0; j<i; j++){
+                sb.append(number + " ");
+                number++;
+            }
+            if(i != lines)
+                sb.append(System.lineSeparator());
+        }
+        System.out.println(sb);
     }
 
     //todo Task 3
@@ -94,5 +109,12 @@ public class App {
             }
         }
         return max;
+    }
+
+    private int getPositiveNumber(char name){
+        System.out.print(String.format("%c: ", name));
+        try(Scanner scanner = new Scanner(System.in)){
+            return scanner.nextInt();
+        }
     }
 }
