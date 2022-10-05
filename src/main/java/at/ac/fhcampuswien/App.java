@@ -54,7 +54,19 @@ public class App {
 
     //todo Task 4
     public void printRhombus(){
-        // input your solution here
+        try(Scanner scanner = new Scanner(System.in)){
+            System.out.print("h: ");
+            int height = scanner.nextInt();
+            System.out.print("c: ");
+            char c = scanner.next().charAt(0);
+
+            if(height % 2 == 0){
+                System.out.println("Invalid number!");
+                return;
+            }
+
+            actuallyPrintRhombus(height, c);
+        }
     }
 
     //todo Task 5
@@ -151,5 +163,28 @@ public class App {
         try(Scanner scanner = new Scanner(System.in)){
             return scanner.nextInt();
         }
+    }
+
+    private void actuallyPrintRhombus(int height, char character){
+     for(int i=0; i<height; i++){
+         if(i<=height/2){
+             int j = 0;
+             for(; j <= ((height/2)-i-1); j++){
+                 System.out.print(" ");
+             }
+             for(;j <= ((height/2)+i); j++){
+                 System.out.print((char)(character - Math.abs(j- (height/2))));
+             }
+         }else{
+             int j=0;
+             for(; j <= (i - (height/2)-1); j++){
+                 System.out.print(" ");
+             }
+             for(;j <= height - i+1; j++){
+                 System.out.print((char)(character - Math.abs(j- ((height/2)))));
+             }
+         }
+         System.out.println();
+     }
     }
 }
