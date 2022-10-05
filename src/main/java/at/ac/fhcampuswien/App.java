@@ -59,7 +59,33 @@ public class App {
 
     //todo Task 5
     public void marks(){
-        // input your solution here
+        try (Scanner scanner = new Scanner(System.in)){
+            int markSum = 0;
+            int markCount = 0;
+            int negativeMarks = 0;
+            while(true){
+                markCount++;
+                System.out.printf("Mark %d: ", markCount);
+                int mark = scanner.nextInt();
+                if(mark < 0 || mark > 5){
+                    System.out.println("Invalid mark!");
+                    markCount--;
+                    continue;
+                }
+                if(mark == 0){
+                    double average = markCount == 0 || markSum == 0 ? 0:(double)markSum/(markCount - 1);
+
+                    System.out.printf("Average: %.2f" + System.lineSeparator(),average);
+                    System.out.println("Negative marks: " + negativeMarks);
+                    return;
+                }
+                markSum += mark;
+                if(mark == 5){
+                    negativeMarks++;
+                }
+            }
+
+        }
     }
 
     //todo Task 6
