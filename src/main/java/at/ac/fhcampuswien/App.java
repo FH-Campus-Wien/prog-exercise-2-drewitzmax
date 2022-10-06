@@ -102,7 +102,11 @@ public class App {
 
     //todo Task 6
     public void happyNumbers(){
-        // input your solution here
+        try(Scanner scanner = new Scanner(System.in)){
+            System.out.print("n: ");
+            int number = scanner.nextInt();
+            this.recursedHappyNumber(number);
+        }
     }
 
     public static void main(String[] args){
@@ -181,10 +185,28 @@ public class App {
                  System.out.print(" ");
              }
              for(;j <= height - i+1; j++){
-                 System.out.print((char)(character - Math.abs(j- ((height/2)))));
+                 System.out.print((char)(character - Math.abs(j- (height/2))));
              }
          }
          System.out.println();
      }
+    }
+
+    private void recursedHappyNumber(int number){
+        if(number == 4){
+            System.out.println("Sad number!");
+            return;
+        }
+        if(number == 1){
+            System.out.println("Happy number!");
+            return;
+        }
+        int res = 0;
+        String numString = Integer.toString(number);
+        for (char c: numString.toCharArray()){
+            int charNumber = Integer.parseInt(String.valueOf(c));
+            res += charNumber * charNumber;
+        }
+        recursedHappyNumber(res);
     }
 }
